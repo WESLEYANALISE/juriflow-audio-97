@@ -90,8 +90,9 @@ export const NewsCard = ({ news, onClick }: NewsCardProps) => {
       
       {/* Read indicator */}
       {news.isRead && (
-        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center">
-          <CheckCircle className="h-3 w-3 text-primary" />
+        <div className="absolute top-3 right-3 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium flex items-center gap-1 shadow-sm">
+          <CheckCircle className="h-3 w-3" />
+          Lida
         </div>
       )}
     </Card>
