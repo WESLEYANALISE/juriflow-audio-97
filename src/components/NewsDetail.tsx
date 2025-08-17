@@ -33,9 +33,12 @@ export const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
 
   const togglePlay = () => {
     if (audioRef.current) {
-      // Pause video if it's playing
+      // Pause video if it's playing with a small delay to avoid DOM conflicts
       if (showVideo) {
-        setShowVideo(false);
+        // Give YouTube player time to clean up properly
+        setTimeout(() => {
+          setShowVideo(false);
+        }, 100);
       }
       
       if (isPlaying) {

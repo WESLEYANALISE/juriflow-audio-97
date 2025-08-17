@@ -55,8 +55,13 @@ export const YouTubePlayer = ({ videoId, onVideoEnd, onVideoStart }: YouTubePlay
     }
 
     return () => {
-      if (playerRef.current) {
-        playerRef.current.destroy();
+      if (playerRef.current && typeof playerRef.current.destroy === 'function') {
+        try {
+          playerRef.current.destroy();
+        } catch (error) {
+          // Ignore cleanup errors to prevent crashes
+          console.warn('YouTube player cleanup error:', error);
+        }
       }
     };
   }, [videoId, onVideoEnd, onVideoStart]);
