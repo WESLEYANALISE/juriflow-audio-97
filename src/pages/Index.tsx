@@ -12,10 +12,12 @@ export interface NewsItem {
   fonte: string;
   portal: string;
   data: string;
+  isRead?: boolean;
 }
 
 const Index = () => {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+  const [readNews, setReadNews] = useState<Set<number>>(new Set());
 
   return (
     <div className="min-h-screen bg-background">
@@ -27,7 +29,13 @@ const Index = () => {
             onBack={() => setSelectedNews(null)} 
           />
         ) : (
-          <NewsGrid onNewsClick={setSelectedNews} />
+          <NewsGrid 
+            onNewsClick={(news) => {
+              setReadNews(prev => new Set(prev.add(news.id)));
+              setSelectedNews(news);
+            }} 
+            readNews={readNews}
+          />
         )}
       </main>
     </div>

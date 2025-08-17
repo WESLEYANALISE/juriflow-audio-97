@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Play, Pause, ExternalLink, Volume2, Video } from "lucide-react";
@@ -22,6 +22,14 @@ export const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
   const isVideo = isYouTubeUrl(news.capa);
   const videoId = isVideo ? extractYouTubeId(news.capa) : null;
   const thumbnailUrl = isVideo ? getYouTubeThumbnail(news.capa) : news.capa;
+
+  useEffect(() => {
+    // Scroll to top smoothly when component mounts
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, []);
 
   const togglePlay = () => {
     if (audioRef.current) {

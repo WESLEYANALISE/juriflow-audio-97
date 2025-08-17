@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { NewsItem } from "@/pages/Index";
-import { PlayCircle, Clock, Video } from "lucide-react";
+import { PlayCircle, Clock, Video, CheckCircle } from "lucide-react";
 import { isYouTubeUrl, getYouTubeThumbnail } from "@/lib/utils";
 
 interface NewsCardProps {
@@ -14,7 +14,7 @@ export const NewsCard = ({ news, onClick }: NewsCardProps) => {
 
   return (
     <Card 
-      className="group overflow-hidden bg-gradient-surface border-border/50 hover:border-primary/30 cursor-pointer transition-all duration-300 hover:shadow-card hover:-translate-y-1"
+      className={`group overflow-hidden bg-gradient-surface border-border/50 hover:border-primary/30 cursor-pointer transition-all duration-300 hover:shadow-card hover:-translate-y-1 relative ${news.isRead ? 'opacity-80' : ''}`}
       onClick={onClick}
     >
       <div className="flex gap-4 p-4">
@@ -87,6 +87,13 @@ export const NewsCard = ({ news, onClick }: NewsCardProps) => {
           </div>
         </div>
       </div>
+      
+      {/* Read indicator */}
+      {news.isRead && (
+        <div className="absolute top-2 right-2 w-5 h-5 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center">
+          <CheckCircle className="h-3 w-3 text-primary" />
+        </div>
+      )}
     </Card>
   );
 };

@@ -6,9 +6,10 @@ import { Loader2 } from "lucide-react";
 
 interface NewsGridProps {
   onNewsClick: (news: NewsItem) => void;
+  readNews: Set<number>;
 }
 
-export const NewsGrid = ({ onNewsClick }: NewsGridProps) => {
+export const NewsGrid = ({ onNewsClick, readNews }: NewsGridProps) => {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -75,7 +76,7 @@ export const NewsGrid = ({ onNewsClick }: NewsGridProps) => {
         {news.map((item) => (
           <NewsCard
             key={item.id}
-            news={item}
+            news={{...item, isRead: readNews.has(item.id)}}
             onClick={() => onNewsClick(item)}
           />
         ))}
